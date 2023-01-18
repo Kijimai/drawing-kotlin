@@ -6,34 +6,63 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <jibby.tutorials.letsmakeart2.DrawingView
-        android:id="@+id/dvDrawingView"
+    <FrameLayout
+        android:id="@+id/flDrawingViewContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="6dp"
+        android:padding="1dp"
         android:background="@drawable/canvas_drawing_view_layout"
         app:layout_constraintBottom_toTopOf="@id/llPaintColors"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageButton
-        android:id="@+id/btnBrushSize"
+        <!-- Order matters here, the one we define before will be the bottom layer -->
+        <ImageView
+            android:id="@+id/ivBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:background="@drawable/goobbue"
+            />
+
+        <jibby.tutorials.letsmakeart2.DrawingView
+            android:id="@+id/dvDrawingView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80FFFFFF" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/llActionButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_brush"
         app:layout_constraintTop_toBottomOf="@id/llPaintColors"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/ibImgGallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_image_gallery" />
+        <ImageButton
+            android:id="@+id/btnBrushSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_brush" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llPaintColors"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/dvDrawingView"
-        app:layout_constraintBottom_toTopOf="@id/btnBrushSize"
+        app:layout_constraintTop_toBottomOf="@id/flDrawingViewContainer"
+        app:layout_constraintBottom_toTopOf="@id/llActionButtons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         >
