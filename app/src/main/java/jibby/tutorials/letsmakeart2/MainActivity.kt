@@ -64,10 +64,18 @@ class MainActivity : AppCompatActivity() {
         brushDialog.show()
     }
 
-    fun paintClick(view: View) {
-        var colorTag = view.tag
+    fun paintClicked(view: View) {
+        if(view !== mImageButtonCurrentColor) {
+            val imageButton = view as ImageButton
+            val colorTag = imageButton.tag.toString()
+            drawingView?.setColor(colorTag)
 
+            imageButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.palette_selected))
 
+            mImageButtonCurrentColor?.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.palette_normal))
 
+            // overriding the existing color that was picked with what ImageButton was pressed
+            mImageButtonCurrentColor = view
+        }
     }
 }
