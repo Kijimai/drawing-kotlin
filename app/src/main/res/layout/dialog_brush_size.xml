@@ -5,11 +5,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageButton
+        android:id="@+id/ibXsSmallBrush"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/xs_small_brush"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ibSmallBrush"/>
+
+    <ImageButton
         android:id="@+id/ibSmallBrush"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/small_brush"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ibXsSmallBrush"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/ibMediumBrush"/>
@@ -22,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@id/ibSmallBrush"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/ibLargeBrush"/>
+        app:layout_constraintBottom_toTopOf="@+id/ibLargeBrush"/>
 
     <ImageButton
         android:id="@+id/ibLargeBrush"

@@ -32,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#80FFFFFF" />
+
     </FrameLayout>
 
     <LinearLayout
@@ -139,7 +140,6 @@
             android:tag="@color/pink"
             android:onClick="paintClicked"
             android:background="@color/pink" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
