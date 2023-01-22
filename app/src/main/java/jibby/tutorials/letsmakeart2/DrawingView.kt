@@ -28,6 +28,8 @@ class DrawingView(context: Context, attributes: AttributeSet): View(context, att
     private var canvas : Canvas? = null
 
     private var mPaths = ArrayList<CustomPath>()
+    // An Array list to hold a list of CustomPaths for undoing an stroke
+    private var mUndoPaths = ArrayList<CustomPath>()
 
     // Runs when the class is created
     init {
@@ -91,7 +93,7 @@ class DrawingView(context: Context, attributes: AttributeSet): View(context, att
             else -> return false
         }
 
-        // Invalidate the whole view, if the view is visible
+        // Invalidate the whole view, if the view is visible -- aka redraws the whole view
         invalidate()
         return true
     }
@@ -131,5 +133,19 @@ class DrawingView(context: Context, attributes: AttributeSet): View(context, att
     fun setColor(newColor: String) {
         color = Color.parseColor(newColor)
         mDrawPaint!!.color = color
+    }
+
+    fun onClickUndo() {
+        if(mPaths.size > 0) {
+            mUndoPaths.add(mPaths.removeAt(mPaths.size - 1))
+            invalidate()
+        }
+    }
+
+    fun onClickRedo() {
+        if(mUndoPaths.size > 0) {
+            mPaths.add(mUndoPaths.removeAt(mUndoPaths.size - 1))
+            invalidate()
+        }
     }
 }
