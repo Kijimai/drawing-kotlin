@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsMakeArt2"
         tools:targetApi="31">
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
@@ -28,6 +30,17 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+
+        <provider
+            android:authorities="jibby.tutorials.letsmakeart2.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true"/>
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/path"/>
+
     </application>
 
 </manifest>

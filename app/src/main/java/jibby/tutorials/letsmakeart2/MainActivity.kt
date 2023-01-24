@@ -3,6 +3,9 @@ package jibby.tutorials.letsmakeart2
 import android.Manifest
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -22,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     private var drawingView: DrawingView? = null
     private var mImageButtonCurrentColor: ImageButton? = null
+
 
     val openGalleryLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         result ->
@@ -81,6 +85,11 @@ class MainActivity : AppCompatActivity() {
         btnRedo.setOnClickListener {
             drawingView?.onClickRedo()
         }
+
+        val btnSave : ImageButton = findViewById(R.id.ibSave)
+        btnSave.setOnClickListener {
+
+        }
     }
 
     private fun requestStoragePermission() {
@@ -113,6 +122,7 @@ class MainActivity : AppCompatActivity() {
         val brushDialog = Dialog(this)
         brushDialog.setContentView(R.layout.dialog_brush_size)
         brushDialog.setTitle("Select brush size: ")
+
         val xsSmallBtn = brushDialog.findViewById<ImageButton>(R.id.ibXsSmallBrush)
         xsSmallBtn.setOnClickListener {
             drawingView?.setSizeForBrush(5.toFloat())
@@ -158,5 +168,21 @@ class MainActivity : AppCompatActivity() {
             // overriding the existing color that was picked with what ImageButton was pressed
             mImageButtonCurrentColor = view
         }
+    }
+
+    private fun getBitmapFromView(view: View) : Bitmap {
+        val returnedBitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(returnedBitmap)
+        val bgDrawable = view.background
+        if(bgDrawable != null) {
+            bgDrawable.draw(canvas)
+        } else {
+            canvas.drawColor(Color.WHITE)
+        }
+
+        // Combines the background with the canvas painting
+        view.draw(canvas)
+
+        return returnedBitmap
     }
 }
